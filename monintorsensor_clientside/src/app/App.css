@@ -1,0 +1,14 @@
+
+button {
+  text-transform: uppercase;
+}
+
+.app-wrapper {
+  flex: 1 0 auto;
+}
+
+
+.app-content{
+  padding: 24px;
+  margin: 30px;
+}

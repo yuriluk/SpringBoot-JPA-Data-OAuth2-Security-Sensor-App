@@ -1,0 +1,47 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: google-cleint-id
+            clientSecret: google-secret
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          github:
+            clientId: github-cleint-id
+            clientSecret: github-secret
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+          facebook:
+            clientId: facebook-cleint-id
+            clientSecret: facebook-secret
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}" # Note that facebook now mandates the use of https redirect URIs, so make sure your app supports https in production
+            scope:
+              - email
+              - public_profile
+
+app:
+  auth:
+    tokenSecret: WfCZ4WKK5wK3wU9VmCmhyubEsdaHqI2E #it is better to generate your own token
+    tokenExpirationMsec: 60000000 #one minute; remove one 0 and show tokes death
+
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect/login
+      - http://localhost:3000/oauth2/redirect
+      - http://localhost:3000/
+
+#server:
+#  port: 8080
+#  url: http://localhost:${server.port}

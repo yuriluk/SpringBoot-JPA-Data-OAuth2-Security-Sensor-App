@@ -1,0 +1,77 @@
+{
+  "name": "sensor_portal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "webstart": "webpack-dev-server --mode development --open --hot --watch",
+    "webbuild": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-app-rewired": "^2.1.5",
+    "react-dom": "^16.13.0",
+    "react-localization": "^1.0.15",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-s-alert": "^1.4.1",
+    "react-scripts": "3.4.0",
+    "css-loader": "^3.4.2",
+    "cssnano": "latest",
+    "customize-cra": "^0.9.1",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "less-vars-to-js": "^1.3.0",
+    "mini-css-extract-plugin": "latest",
+    "postcss-flexbugs-fixes": "latest",
+    "postcss-modules-values": "latest",
+    "autoprefixer": "latest",
+    "@ant-design/icons": "latest",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.0.2",
+    "axios": "^0.19.2"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "8.0.6",
+    "babel-plugin-import": "^1.13.0",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "precss": "^4.0.0",
+    "style-loader": "^1.1.3",
+    "webpack": "4.41.5",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "3.10.2"
+  }
+}

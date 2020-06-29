@@ -1,0 +1,76 @@
+.container {
+    text-align: center;
+}
+
+
+.content {
+    background: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: middle;
+    position: relative;
+    padding: 35px;
+    width: 500px;
+}
+
+
+.title {
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+    font-size: 200%;
+}
+
+
+.button {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.socialRow {
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.socialRow {
+    align-items: center;
+    text-align: left;
+}
+
+img {
+    height: 24px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 3px;
+}
+
+
+.facebook img {
+    margin-right: 10px;
+}
+
+.github img {
+    margin-right: 10px;
+}
+
+.google img {
+    height: 32px;
+    margin-top: -3px;
+    margin-right: 7px;
+    margin-left: 0;
+}
+
+.google:hover, .github:hover, .facebook:hover {
+    color: crimson;
+}
+
+.separator {
+    margin-bottom: 10px;
+}
+
+

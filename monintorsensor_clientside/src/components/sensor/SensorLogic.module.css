@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.row label {
+    margin-right: 10px;
+    text-align: right;
+}
+
+
+
+.customHidden {
+    display: none;
+}
+
+.buttonRow, .changeDeleteRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
