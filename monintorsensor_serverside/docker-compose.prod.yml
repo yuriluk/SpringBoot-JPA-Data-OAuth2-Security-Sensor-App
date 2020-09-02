@@ -1,0 +1,59 @@
+# Use postgres/example user/password credentials
+version: '3.8'
+services:
+  # Front-end built with ReactJS
+  react-prod:
+    container_name: react_prod
+    build:
+      context: ../monintorsensor_clientside  # Build an image from the specified dockerfile in the `monintorsensor_clientside` directory.
+      dockerfile: Dockerfile.prod
+    ports:
+      - '3000:80'   # Forward the exposed port 3000 on the host machine to port 8080 on the container [HOST:CONTAINER]
+    restart: unless-stopped
+    depends_on:   # This service depends on api. Start it first.
+      - api
+    networks:   # Networks to join (Services on the same network can communicate with each other using their name or alias)
+      - sensor-network
+
+  # Back-end api built with Java and SpringBoot
+  api:
+    container_name: java_springboot_api
+    build:
+      context: .   # Build an image from the specified dockerfile in the `[current]` directory.
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'   # Forward the exposed port 8080  on the host machine to port 8080 on the container [HOST:CONTAINER]
+    restart: unless-stopped # Tell the container to restart always until it is not stopped if it fails
+    depends_on:    # This service depends on db. Start it first.
+      - db
+    networks:  # Networks to join (Services on the same network can communicate with each other using their name or alias)
+      - sensor-network
+    environment:  # Pass the needed environment variables to the service
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sensorDB
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=pass
+
+  # POSTGRESQL DB
+  db:
+    image: library/postgres:11.2-alpine
+    container_name: postgres_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'   # Forward the exposed port 5432 on the host machine to port 5432 on the container [HOST:CONTAINER]
+    restart: unless-stopped  # Tell the container to restart always until it is not stopped if it fails
+    networks:   # Networks to join (Services on the same network can communicate with each other using their name or alias)
+      - sensor-network
+    environment:    # Pass the needed environment variables to the service
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=sensorDB
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+# Volumes to be created to facilitate volumes outside containers to store data
+volumes:
+  db_data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  sensor-network:

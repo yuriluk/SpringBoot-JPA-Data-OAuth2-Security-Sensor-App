@@ -12,11 +12,11 @@
         <!-- lookup parent from repository -->
     </parent>
 
+    <artifactId>monitor-sensor</artifactId>
     <groupId>org.example</groupId>
-    <artifactId>monitorSensor</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>monitorSensor</name>
+    <packaging>pom</packaging>
+    <name>monitor-sensor</name>
     <description>Monitor Sensor project on Spring Boot</description>
 
     <modules>
@@ -28,8 +28,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <!--        <start-class>org.example.sensor.configuration.Application.class</start-class>-->
+<!--        <start-class>org.example.sensor.configuration.Application</start-class>-->
         <maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
+<!--        <dockerfile-maven-plugin-version>1.4.13</dockerfile-maven-plugin-version>-->
+        <swagger-version>2.9.2</swagger-version>
+        <jUnit-version>4.12</jUnit-version>
     </properties>
 
     <dependencies>
@@ -48,22 +51,45 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${jUnit-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger-version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger-version}</version>
         </dependency>
     </dependencies>
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--                <version>${dockerfile-maven-plugin-version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>build</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <repository>sensor/${project.artifactId}</repository>-->
+<!--                            <tag>${project.version}</tag>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
 </project>

@@ -1,0 +1,65 @@
+# Use postgres/example user/password credentials
+version: '3.8'
+services:
+  # Front-end built with ReactJS
+  react:
+    container_name: react_ui
+    networks:
+      - sensor-network
+    build:
+      context: ../monintorsensor_clientside
+      dockerfile: Dockerfile
+    volumes:
+      - ../monintorsensor_clientside:/app
+      - react_data:/app/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - api
+
+  # Back-end api built with Java and SpringBoot
+  api:
+    container_name: java_springboot_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - sensor-network
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/sensorDB
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=pass
+
+
+  # POSTGRESQL DB
+  db:
+    image: library/postgres:11.2-alpine
+    container_name: postgres_db
+    volumes:
+      - ./repository/src/main/resources/:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - sensor-network
+    ports:
+      - '5432:5432'
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=sensorDB
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+volumes:
+  db_data:
+  react_data:
+
+
+networks:
+  sensor-network:
