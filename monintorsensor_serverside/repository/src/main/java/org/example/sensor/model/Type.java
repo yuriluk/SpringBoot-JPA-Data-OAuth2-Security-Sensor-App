@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "types", schema = "public")
+@Table(name = "types")
 public class Type extends AbstractEntity {
 
     @Column(name = "name", nullable = false, unique = true, length = 64)

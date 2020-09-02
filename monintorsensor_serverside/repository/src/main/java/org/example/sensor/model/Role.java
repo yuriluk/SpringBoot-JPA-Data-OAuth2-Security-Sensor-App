@@ -1,14 +1,17 @@
 package org.example.sensor.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles", schema="public")
+@Table(name = "roles")
 public class Role extends AbstractEntity {
 
     @Column(nullable = false, unique = true, length = 30)

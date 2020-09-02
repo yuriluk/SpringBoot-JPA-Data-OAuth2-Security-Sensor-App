@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "locations", schema="public")
+@Table(name = "locations")
 public class Location extends AbstractEntity {
 
     @Column(name = "name", unique = true, length = 40)

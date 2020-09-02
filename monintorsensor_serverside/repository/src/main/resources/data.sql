@@ -17,8 +17,9 @@ INSERT INTO  type_units(unit_id, type_id) VALUES(2,2);
 INSERT INTO  type_units(unit_id, type_id) VALUES(3,3);
 INSERT INTO  type_units(unit_id, type_id) VALUES(4,4);
 
+INSERT INTO  locations(name) VALUES('Room');
 
-insert into public.sensors(description, location_id, model, name, range_from, range_to)
-values('first sensor', 1, ' FIRST', 'my sensor', -10, 20);
+INSERT INTO sensors(description, location_id, model, name, range_from, range_to)
+VALUES('first sensor', 1, ' FIRST', 'my sensor', -10, 20);
 
 INSERT INTO  sensor_types(sensor_id, type_id) VALUES(1,1);

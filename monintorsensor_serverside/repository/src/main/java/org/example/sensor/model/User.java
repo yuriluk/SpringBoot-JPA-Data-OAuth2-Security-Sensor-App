@@ -9,7 +9,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "users", schema="public")
+@Table(name = "users")
 public class User extends AbstractEntity {
 
     @Column(name = "name", nullable = false, length = 20)
@@ -20,7 +20,7 @@ public class User extends AbstractEntity {
     private String login;
 
 
-    @Column(name = "password",  length = 64)
+    @Column(name = "password", length = 64)
     private String password;
 
 
@@ -42,7 +42,6 @@ public class User extends AbstractEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
 
 
     public User() {

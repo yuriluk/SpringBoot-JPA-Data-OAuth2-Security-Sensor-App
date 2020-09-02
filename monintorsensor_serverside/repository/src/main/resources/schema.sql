@@ -12,7 +12,7 @@ create DATABASE "sensorMonitor"
 -- Table: sensors
 -- DROP TABLE sensors;
 --------------------------------------------
-create TABLE IF NOT EXISTS public.sensors
+create TABLE IF NOT EXISTS sensors
 (
     id               BIGSERIAL PRIMARY KEY NOT NULL,
     name             VARCHAR(30)           NOT NULL,
@@ -24,11 +24,21 @@ create TABLE IF NOT EXISTS public.sensors
 );
 --------------------------------------------
 
+create table if not exists locations
+(
+    id BIGSERIAL NOT NULL
+        constraint locations_pkey
+            PRIMARY KEY,
+    name VARCHAR(40)
+        constraint uk_locations
+            UNIQUE
+);
+
 
 -- Table: types
 -- DROP TABLE types;
 --------------------------------------------
-create TABLE IF NOT EXISTS public.types
+create TABLE IF NOT EXISTS types
 (
     id      BIGSERIAL PRIMARY KEY NOT NULL,
     name    VARCHAR(64)  UNIQUE   NOT NULL
@@ -38,17 +48,20 @@ create TABLE IF NOT EXISTS public.types
 -- Table: units
 -- DROP TABLE units;
 -------------------------------------------------
-create TABLE IF NOT EXISTS public.units
+create TABLE IF NOT EXISTS units
 (
-    id   BIGSERIAL PRIMARY KEY NOT NULL,
+    id   BIGSERIAL PRIMARY KEY NOT NULL
+        constraint units_pkey,
     name VARCHAR(32) UNIQUE    NOT NULL
+        constraint uk_units
 );
 ---------------------------------------------
+
 
 -- Table: "users"
 -- DROP TABLE "users";
 ----------------------------------------------
-create TABLE IF NOT EXISTS public.users
+create TABLE IF NOT EXISTS users
 (
     id         BIGSERIAL PRIMARY KEY NOT NULL,
     name       VARCHAR(20)           NOT NULL,
@@ -63,7 +76,7 @@ create TABLE IF NOT EXISTS public.users
 -- Table: roles
 -- DROP TABLE roles;
 -------------------------------------------------
-create TABLE IF NOT EXISTS public.roles
+create TABLE IF NOT EXISTS roles
 (
     id          BIGSERIAL PRIMARY KEY NOT NULL,
     name        VARCHAR(30) UNIQUE    NOT NULL
@@ -71,19 +84,19 @@ create TABLE IF NOT EXISTS public.roles
 -------------------------------------------------
 
 create UNIQUE INDEX IF NOT EXISTS roles_name_uindex
-    ON public.roles (name);
+    ON roles (name);
 
 
 -- Table: sensor_types
 -- DROP TABLE sensor_types;
 ------------------------------------------
-create TABLE IF NOT EXISTS public.sensor_types
+create TABLE IF NOT EXISTS sensor_types
 (
     sensor_id   bigint NOT NULL
-        REFERENCES public.sensors (id) MATCH SIMPLE
+        REFERENCES sensors (id) MATCH SIMPLE
             ON update CASCADE ON delete CASCADE,
     type_id     bigint NOT NULL
-        REFERENCES public.types (id) MATCH SIMPLE
+        REFERENCES types (id) MATCH SIMPLE
             ON update CASCADE ON delete CASCADE
 );
 --------------------------------------------
@@ -91,13 +104,13 @@ create TABLE IF NOT EXISTS public.sensor_types
 -- Table: type_units
 --DROP TABLE type_units;
 --------------------------------------------
-create TABLE IF NOT EXISTS public.type_units
+create TABLE IF NOT EXISTS type_units
 (
     unit_id bigint NOT NULL
-        REFERENCES public.units (id) MATCH SIMPLE
+        REFERENCES units (id) MATCH SIMPLE
             ON update CASCADE ON delete CASCADE,
     type_id  bigint NOT NULL
-        REFERENCES public.types (id) MATCH SIMPLE
+        REFERENCES types (id) MATCH SIMPLE
             ON update CASCADE ON delete CASCADE
 );
 -------------------------------------------------
@@ -105,13 +118,13 @@ create TABLE IF NOT EXISTS public.type_units
 -- Table: users_roles
 -- DROP TABLE users_roles;
 -------------------------------------------------
-create TABLE IF NOT EXISTS public.users_roles
+create TABLE IF NOT EXISTS users_roles
 (
     role_id BIGINT NOT NULL
-        REFERENCES public.roles (id) MATCH SIMPLE
+        REFERENCES roles (id) MATCH SIMPLE
             ON update CASCADE ON delete NO ACTION,
     user_id BIGINT NOT NULL
-        REFERENCES public.users (id) MATCH SIMPLE
+        REFERENCES users (id) MATCH SIMPLE
             ON update CASCADE ON delete CASCADE
 );
 -------------------------------------------------

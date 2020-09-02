@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sensors", schema="public")
+@Table(name = "sensors")
 public class Sensor extends AbstractEntity {
 
     @Column(name = "name", nullable = false, length = 30)
@@ -21,14 +21,14 @@ public class Sensor extends AbstractEntity {
     @Column(name = "range_to", nullable = false)
     private Integer rangeTo;
 
-    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "sensor_types",
             joinColumns = @JoinColumn(name = "sensor_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "type_id", referencedColumnName = "id"))
     private Type type;
 
 
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "location_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Location location;

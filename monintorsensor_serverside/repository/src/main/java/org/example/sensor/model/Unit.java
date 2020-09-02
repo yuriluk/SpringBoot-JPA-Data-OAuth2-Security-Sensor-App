@@ -1,10 +1,12 @@
 package org.example.sensor.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "units", schema="public")
+@Table(name = "units")
 public class Unit extends AbstractEntity {
 
     @Column(name = "name", nullable = false, unique = true, length = 32)
